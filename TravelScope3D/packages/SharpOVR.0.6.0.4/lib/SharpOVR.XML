@@ -1,0 +1,1973 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpOVR</name>
+    </assembly>
+    <members>
+        <member name="T:SharpOVR.EyeType">
+            <summary>
+            Specifies which eye is being used for rendering.
+            This type explicitly does not include a third "NoStereo" option, as such is
+            not required for an HMD-centered API.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeType.Left">
+            <summary>
+            Left eye
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeType.Right">
+            <summary>
+            Right eye
+            </summary>
+        </member>
+        <member name="T:SharpOVR.HMDCapabilities">
+            <summary>
+            HMD capability bits reported by device.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.DebugDevice">
+            <summary>
+            Read only, means HMD device is a virtual debug device
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.LowPersistence">
+            <summary>
+            HMD supports low persistence mode
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.DynamicPrediction">
+            <summary>
+            Adjust prediction dynamically based on internally measured latency
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.NoVSync">
+            <summary>
+            Support rendering without VSync for debugging
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.WritableMask">
+            <summary>
+            These bits can be modified by HMD.SetEnabledCaps
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDCapabilities.ServiceMask">
+            <summary>
+            These flags are currently passed into the service. May change without notice.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.HMDType">
+            <summary>
+            Enumerates all HMD types that we support.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.DK1">
+            <summary>
+            Development Kit 1
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.DKHD">
+            <summary>
+            Development Kit HD
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.DK2">
+            <summary>
+            Development Kit 2
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.BlackStar">
+            <summary>
+            BlackStar
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.CB">
+            <summary>
+            Crescent Bay
+            </summary>
+        </member>
+        <member name="F:SharpOVR.HMDType.Other">
+            <summary>
+            Some HMD other then the one in the enumeration.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.InitFlags">
+            <summary>
+            Flags for initialization.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitFlags.None">
+            <summary>
+            No flags
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitFlags.Debug">
+            <summary>
+            When a debug library is requested, a slower debugging version of the library will
+            be run which can be used to help solve problems in the library and debug game code.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitFlags.ServerOptional">
+            <summary>
+            When ServerOptional is set, the ovr_Initialize() call not will block waiting for
+            the server to respond.  If the server is not reachable it may still succeed.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitFlags.RequestVersion">
+            <summary>
+            When a version is requested, LibOVR runtime will respect the RequestedMinorVersion
+            field and will verify that the RequestedMinorVersion is supported.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitFlags.ForceNoDebug">
+            <summary>
+            Forces debug features of LibOVR off explicitly, even if it is built in debug mode.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LayerFlags">
+            <summary>
+            Identifies flags used by LayerHeader and which are passed to HMD.SubmitFrame().
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerFlags.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerFlags.HighQuality">
+            <summary>
+            Costs performance, but looks better.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerFlags.TextureOriginAtBottomLeft">
+            <summary>
+            The opposite is TopLeft.
+            Generally this is false for D3D, true for OpenGL.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LayerType">
+            <summary>
+            Describes layer types that can be passed to HMD.SubmitFrame().
+            Each layer type has an associated struct, such as LayerEyeFov.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerType.Disabled">
+            <summary>
+            Layer is disabled.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerType.EyeFov">
+            <summary>
+            Described by LayerEyeFov.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerType.EyeFovDepth">
+            <summary>
+            Described by LayerEyeFovDepth.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerType.QuadInWorld">
+            <summary>
+            Described by LayerQuad.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerType.QuadHeadLocked">
+            <summary>
+            Described by LayerQuad. Displayed in front of your face, moving with the head.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerType.Direct">
+            <summary>
+            Described by LayerDirect. Passthrough for debugging and custom rendering.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LogLevel">
+            <summary>
+            Logging levels
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LogLevel.Debug">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LogLevel.Info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LogLevel.Error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SharpOVR.Projection">
+            <summary>
+            Enumerates modifications to the projection matrix based on the application's needs
+            </summary>
+        </member>
+        <member name="F:SharpOVR.Projection.None">
+            <summary>
+            None (Left-Handed)
+            </summary>
+        </member>
+        <member name="F:SharpOVR.Projection.RightHanded">
+            <summary>
+            Enable if using right-handed transformations in your application
+            </summary>
+        </member>
+        <member name="F:SharpOVR.Projection.FarLessThanNear">
+            <summary>
+            After projection transform is applied, far values stored in the depth buffer will be less than closer depth values
+            NOTE: Enable only if application is using a floating-point depth buffer for proper precision
+            </summary>
+        </member>
+        <member name="F:SharpOVR.Projection.FarClipAtInfinity">
+            <summary>
+            When this flag is used, the zfar value pushed into ovrMatrix4f_Projection() will be ignored
+            NOTE: Enable only if ovrProjection_FarLessThanNear is also enabled where the far clipping plane will be pushed to infinity
+            </summary>
+        </member>
+        <member name="F:SharpOVR.Projection.ClipRangeOpenGL">
+            <summary>
+            Enable if application is rendering with OpenGL and expects a projection matrix with a clipping range of (-w to w)
+            Ignore this flag if your application already handles the conversion from D3D range (0 to w) to OpenGL
+            </summary>
+        </member>
+        <member name="T:SharpOVR.RenderAPIType">
+            <summary>
+            These types are used to hide platform-specific details when passing
+            render device, OS, and texture data to the API.
+            
+            The benefit of having these wrappers versus platform-specific API functions is
+            that they allow game glue code to be portable. A typical example is an
+            engine that has multiple back ends, say GL and D3D. Portable code that calls
+            these back ends may also use LibOVR. To do this, back ends can be modified
+            to return portable types such as ovrTexture and ovrRenderAPIConfig.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIType.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIType.OpenGL">
+            <summary>
+            Open GL
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIType.Android_GLES">
+            <remarks>
+            May include extra native window pointers, etc.
+            </remarks>
+        </member>
+        <member name="F:SharpOVR.RenderAPIType.D3D9">
+            <summary>
+            Direct3D 9
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIType.D3D10">
+            <summary>
+            Direct3D 10
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIType.D3D11">
+            <summary>
+            Direct3D 11
+            </summary>
+        </member>
+        <member name="T:SharpOVR.TrackingCapabilities">
+            <summary>
+            Tracking capability bits reported by device.
+            Used with HMD.ConfigureTracking.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingCapabilities.None">
+            <summary>
+            No tracking capabilities
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingCapabilities.Orientation">
+            <summary>
+            Support orientation tracking (IMU)
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingCapabilities.MagYawCorrection">
+            <summary>
+            Supports yaw drift correction via a magnetometer or other means
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingCapabilities.Position">
+            <summary>
+            Supports positional tracking
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingCapabilities.Idle">
+            <summary>
+             Overrides the other flags. Indicates that the application
+             doesn't care about tracking settings. This is the internal
+             default before HMD.ConfigureTracking is called.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.StatusBits">
+            <summary>
+            Bit flags describing the current status of sensor tracking.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.StatusBits.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SharpOVR.StatusBits.OrientationTracked">
+            <summary>
+            Orientation is currently tracked (connected and in use).
+            </summary>
+        </member>
+        <member name="F:SharpOVR.StatusBits.PositionTracked">
+            <summary>
+            Position is currently tracked (FALSE if out of range).
+            </summary>
+        </member>
+        <member name="F:SharpOVR.StatusBits.CameraPoseTracked">
+            <summary>
+            Camera pose is currently tracked
+            </summary>
+        </member>
+        <member name="F:SharpOVR.StatusBits.PositionConnected">
+            <summary>
+            Position tracking HW is connected.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.StatusBits.HmdConnected">
+            <summary>
+            HMD Display is available and connected.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.MatrixExtensions">
+            <summary>
+            Extension methods for the SharpDX.Matrix struct.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.MatrixExtensions.Transform(SharpDX.Matrix,SharpDX.Vector3)">
+            <summary>
+            Transforms the specified matrix.
+            </summary>
+            <param name="m">The matrix.</param>
+            <param name="v">The vector.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SharpOVR.QuaternionExtensions">
+            <summary>
+            Extension methods for the SharpDX.Quaternion struct.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.QuaternionExtensions.GetEulerAngles(SharpDX.Quaternion,System.Single@,System.Single@,System.Single@)">
+            <summary>
+            Gets the euler angles of a quaternion.
+            </summary>
+            <param name="q">The quqaernion.</param>
+            <param name="yaw">The yaw.</param>
+            <param name="pitch">The pitch.</param>
+            <param name="roll">The roll.</param>
+        </member>
+        <member name="M:SharpOVR.QuaternionExtensions.GetMatrix(SharpDX.Quaternion)">
+            <summary>
+            Gets a matrix from a quaternion.
+            </summary>
+            <param name="q">The qquaternion.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SharpOVR.Vector3Extensions">
+            <summary>
+            Extension methods for the SharpDX.Vector3 struct.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.Vector3Extensions.GetTranslationMatrix(SharpDX.Vector3)">
+            <summary>
+            Gets the translation matrix.
+            </summary>
+            <param name="v">The vector.</param>
+            <returns></returns>
+        </member>
+        <member name="T:SharpOVR.HMD">
+            <summary>
+            Represents a physical Head Mounted Display.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.HMD.#ctor(System.IntPtr)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpOVR.HMD"/> class.
+            </summary>
+            <param name="hmd">The unmanaged hmd pointer.</param>
+        </member>
+        <member name="M:SharpOVR.HMD.GetFovTextureSize(SharpOVR.EyeType,SharpOVR.FovPort,System.Single)">
+            <summary>
+            Calculates texture size recommended for rendering one eye within HMD, given FOV cone.
+            Higher FOV will generally require larger textures to maintain quality.
+            </summary>
+            <param name="eye"></param>
+            <param name="fov"></param>
+            <param name="pixelsPerDisplayPixel">Specifies that number of render target pixels per display
+            pixel at center of distortion; 1.0 is the default value. Lower values
+            can improve performance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.GetDefaultRenderTargetSize(System.Single)">
+            <summary>
+            Calculates texture size recommended for rendering both eyes within HMD, using default eye FOV.
+            </summary>
+            <param name="pixelsPerDisplayPixel">Specifies that number of render target pixels per display
+            pixel at center of distortion; 1.0 is the default value. Lower values
+            can improve performance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.GetMaxRenderTargetSize(System.Single)">
+            <summary>
+            Calculates texture size recommended for rendering both eyes within HMD, using maximum eye FOV.
+            </summary>
+            <param name="pixelsPerDisplayPixel">Specifies that number of render target pixels per display
+            pixel at center of distortion; 1.0 is the default value. Lower values
+            can improve performance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.GetRenderDesc(SharpOVR.EyeType,SharpOVR.FovPort)">
+            <summary>
+            Computes distortion viewport, view adjust and other rendering for the specified
+            eye. This can be used instead of ovrHmd_ConfigureRendering to help setup rendering on
+            the game side.
+            </summary>
+            <param name="eye"></param>
+            <param name="fov"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.SubmitFrame(System.UInt32,SharpOVR.ViewScaleDesc@,SharpOVR.LayerHeader@)">
+            <summary>
+            Submits layers for distortion and display.
+            SubmitFrame triggers distortion and processing which might happen asynchronously.
+            The function will return when there is room in the submission queue and surfaces
+            are available. Distortion might or might not have completed.
+            </summary>
+            <param name="frameIndex">Specifies the targeted frame index, or 0, to refer to one frame after the last time SubmitFrame was called.</param>
+            <param name="viewScaleDesc">Provides additional information needed only if layers contains
+            a LayerType.QuadInWorld or LayerType.QuadHeadLocked. If IntPtr.Zero, a default
+            version is used based on the current configuration and a 1.0 world scale.</param>
+            <param name="layer">The layer's header.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.SubmitFrame(System.UInt32,SharpOVR.LayerHeader@)">
+            <summary>
+            Submits a layer for distortion and display.
+            SubmitFrame triggers distortion and processing which might happen asynchronously.
+            The function will return when there is room in the submission queue and surfaces
+            are available. Distortion might or might not have completed.
+            </summary>
+            <param name="frameIndex">Specifies the targeted frame index, or 0, to refer to one frame after the last time SubmitFrame was called.</param>
+            <param name="layer">The layer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.ConfigureTracking(SharpOVR.TrackingCapabilities,SharpOVR.TrackingCapabilities)">
+            <summary>
+            All tracking interface functions are thread-safe, allowing tracking state to be sampled
+            from different threads.
+            ConfigureTracking starts sensor sampling, enabling specified capabilities, 
+            described by ovrTrackingCaps.
+            Pass None for both supportedTrackingCaps and requiredTrackingCaps to disable tracking.
+            </summary>
+            <param name="supportedCaps">Specifies support that is requested. The function will succeed 
+            even if these caps are not available (i.e. sensor or camera is unplugged). Support
+            will automatically be enabled if such device is plugged in later. Software should
+            check ovrTrackingState.StatusFlags for real-time status.</param>
+            <param name="requiredCaps">Specify sensor capabilities required at the time of the call.
+            If they are not available, the function will fail. Pass None if only specifying
+            supportedTrackingCaps.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.RecenterPose">
+            <summary>
+            Re-centers the sensor orientation.
+            Normally this will recenter the (x,y,z) translational components and the yaw 
+            component of orientation.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.HMD.GetTrackingState(System.Double)">
+            <summary>
+            Returns tracking state reading based on the specified absolute system time.
+            Pass an absTime value of 0.0 to request the most recent sensor reading. In this case
+            both PredictedPose and SamplePose will have the same value.
+            This may also be used for more refined timing of front buffer rendering logic, and so on.
+            </summary>
+            <param name="absTime">Specifies the absolute future time to predict the return TrackingState value. 
+            Use 0 to request the most recent tracking state.</param>
+            <returns>Returns the TrackingState that is predicted for the given absTime.</returns>
+        </member>
+        <member name="M:SharpOVR.HMD.GetFrameTiming(System.UInt32)">
+            <summary>
+            Gets the FrameTiming for the given frame index.
+            The application should increment frameIndex for each successively targeted frame,
+            and pass that index to any relevent OVR functions that need to apply to the frame
+            identified by that index. 
+            This function is thread-safe and allows for multiple application threads to target 
+            their processing to the same displayed frame.
+            </summary>
+            <param name="frameIndex">Identifies the frame the caller wishes to target.</param>
+            <returns>Returns the ovrFrameTiming for the given frameIndex.</returns>
+        </member>
+        <member name="M:SharpOVR.HMD.ResetFrameTiming(System.UInt32)">
+            <summary>
+            Initializes and resets frame time tracking.
+            This is typically not necessary, but is helpful if the application changes vsync state or 
+            video mode. vsync is assumed to be on if this isn't called. Resets internal frame index to 
+            the specified number.
+            </summary>
+            <param name="frameIndex">Identifies the frame the caller wishes to target.</param>
+        </member>
+        <member name="M:SharpOVR.HMD.GetTimeInSeconds">
+            <summary>
+            Returns global, absolute high-resolution time in seconds. 
+            The time frame of reference for this function is not specified and should not be
+            depended upon.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.GetEyePoses(System.UInt32,SharpDX.Vector3[],SharpOVR.PoseF[],SharpOVR.TrackingState@)">
+            <summary>
+            Returns the predicted head pose in outHmdTrackingState and offset eye poses in outEyePoses. 
+            This is a thread-safe function where caller should increment frameIndex with every frame
+            and pass that index where applicable to functions called on the rendering thread.
+            Assuming eyePoses are used for rendering, it should be passed as a part of LayerEyeFov.
+            The caller does not need to worry about applying HmdToEyeViewOffset to the returned eyePoses variables.
+            </summary>
+            <param name="frameIndex">Specifies the targeted frame index, or 0 to refer to one frame after 
+            the last time ovrHmd_SubmitFrame was called.</param>
+            <param name="hmdToEyeViewOffset">Can be ovrEyeRenderDesc.HmdToEyeViewOffset returned from 
+            ovrHmd_GetRenderDesc. For monoscopic rendering, use a vector that is the average 
+            of the two vectors for both eyes.</param>
+            <param name="eyePoses">The predicted eye poses.</param>
+            <param name="trackingState">State of the tracking.</param>
+        </member>
+        <member name="M:SharpOVR.HMD.GetEyePoses(System.UInt32,SharpDX.Vector3[],SharpOVR.PoseF[])">
+            <summary>
+            Returns the predicted head pose in outHmdTrackingState and offset eye poses in outEyePoses.
+            This is a thread-safe function where caller should increment frameIndex with every frame
+            and pass that index where applicable to functions called on the rendering thread.
+            Assuming eyePoses are used for rendering, it should be passed as a part of LayerEyeFov.
+            The caller does not need to worry about applying HmdToEyeViewOffset to the returned eyePoses variables.
+            </summary>
+            <param name="frameIndex">Specifies the targeted frame index, or 0 to refer to one frame after
+            the last time ovrHmd_SubmitFrame was called.</param>
+            <param name="hmdToEyeViewOffset">Can be ovrEyeRenderDesc.HmdToEyeViewOffset returned from
+            ovrHmd_GetRenderDesc. For monoscopic rendering, use a vector that is the average
+            of the two vectors for both eyes.</param>
+            <param name="eyePoses">The predicted eye poses.</param>
+        </member>
+        <member name="M:SharpOVR.HMD.CreateSwapTexture(SharpDX.Direct3D11.Device,SharpDX.DXGI.Format,SharpDX.Size2,System.Boolean)">
+            <summary>
+            Creates a swap texture used to render to this HMD.
+            </summary>
+            <param name="device">The Direct3D11 device.</param>
+            <param name="format">The format of the texture.</param>
+            <param name="size">The size of the texture.</param>
+            <param name="createDepthStencilViews">if set to <c>true</c> create depth stencil views.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.HMD.CreateMirrorTexture(SharpDX.Direct3D11.Device,SharpDX.Direct3D11.Texture2DDescription)">
+            <summary>
+            Create Mirror Texture which is auto-refreshed to mirror Rift contents produced by this application.
+            </summary>
+            <remarks>
+            A second call to ovrHmd_CreateMirrorTextureD3D11 for a given ovrHmd before destroying the first one
+            is not supported and will result in an error return.
+            </remarks>
+            <param name="device">Specifies the associated device, which must be the one that the textures will be used with in the application's process.</param>
+            <param name="description">Specifies requested texture properties.</param>
+            <returns>Returns a Texture2D for the mirror texture.</returns>
+        </member>
+        <member name="M:SharpOVR.HMD.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="P:SharpOVR.HMD.Type">
+            <summary>
+            This HMD's type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.ProductName">
+            <summary>
+            Gets the name describing the product: "Oculus Rift DK1", etc.
+            </summary>
+            <value>
+            The name of the product.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.Manufacturer">
+            <summary>
+            Gets the manufacturer of the product.
+            </summary>
+            <value>
+            The manufacturer.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.HMDCaps">
+            <summary>
+            Gets the capability bits described by HMDCapabilities.
+            </summary>
+            <value>
+            The HMD capabilities.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.TrackingCaps">
+            <summary>
+            Gets the capability bits described by TrackingCapabilities.
+            </summary>
+            <value>
+            The tracking capabilities.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.Resolution">
+            <summary>
+            Gets the resolution of the full HMD screen (both eyes) in pixels.
+            </summary>
+            <value>
+            The resolution.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.DefaultEyeFov">
+            <summary>
+            Gets the default recommended optical FOV for the HMD.
+            </summary>
+            <value>
+            The recommended optical fov.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.MaxEyeFov">
+            <summary>
+            Gets the maximum recommended optical FOV for the HMD.
+            </summary>
+            <value>
+            The maximum optical fov.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.EyeRenderOrder">
+            <summary>
+            Preferred eye rendering order for best performance.
+            Can help reduce latency on sideways-scanned screens.
+            </summary>
+            <value>
+            The eye rendering order.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.ProductId">
+            <summary>
+            Gets the product identifier.
+            </summary>
+            <value>
+            The product identifier.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.VendorId">
+            <summary>
+            Gets the vendor identifier.
+            </summary>
+            <value>
+            The vendor identifier.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.SerialNumber">
+            <summary>
+            Gets the serial number.
+            </summary>
+            <value>
+            The serial number.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.Profile">
+            <summary>
+            Gets the profile.
+            </summary>
+            <value>
+            The profile.
+            </value>
+        </member>
+        <member name="P:SharpOVR.HMD.EnabledCaps">
+            <summary>
+            Gets or sets the capability bits that are enabled as described by HMDCapabilities.
+            Note that this value is different font HMD.HMDCaps, which describes what
+            capabilities are available for that HMD.
+            </summary>
+            <value>
+            The enabled caps.
+            </value>
+        </member>
+        <member name="T:SharpOVR.OVR">
+            <summary>
+            Entry point for the SharpOVR library.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.OVR.LibOVRRTName32">
+            <summary>
+            The 32-bit LibOVRRT library name
+            </summary>
+        </member>
+        <member name="F:SharpOVR.OVR.LibOVRRTName64">
+            <summary>
+            The 64-bit LibOVRRT library name
+            </summary>
+        </member>
+        <member name="M:SharpOVR.OVR.Initialize">
+            <summary>
+            Initialize SharpOVR for application usage. This includes finding and loading the LibOVRRT  
+            shared library. No SharpOVR API functions, other than OVR.GetLastErrorInfo(), can be called
+            unless Initialize succeeds. A successful call to Initialize must be eventually
+            followed by a call to Shutdown. Initialize calls are idempotent. 
+            Calling Initialize twice does not require two matching calls to Shutdown. 
+            If already initialized, the call will not throw an exception.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.OVR.Initialize(SharpOVR.InitParams)">
+            <summary>
+            Library initialization, must be called around all other OVR code.
+            No other functions calls besides InitializeRenderingShim are allowed
+            before Initialize succeeds or after Shutdown.
+            Initializes all Oculus functionality.
+            
+            Use Initialize() with no parameters, suitable for released games.
+            </summary>
+            <param name="parameters">The extra initialization parameters.</param>
+        </member>
+        <member name="M:SharpOVR.OVR.Shutdown">
+            <summary>
+            Library shutdown, must be called after all other OVR code.
+            No other functions calls are allowed after Shutdown.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.OVR.GetLastErrorInfo">
+            <summary>
+            Returns information about the most recent failed return value by the
+            current thread for this library.
+            </summary>
+            <returns></returns>
+            <remarks>
+            This function itself can never generate an error.
+            The last error is never cleared by LibOVR, but will be overwritten by new errors.
+            Do not use this call to determine if there was an error in the last API
+            call as successful API calls don't clear the last ovrErrorInfo.
+            To avoid any inconsistency, GetLastErrorInfo should be called immediately
+            after an API function that returned a failed Result, with no other API
+            functions called in the interim.
+            </remarks>
+        </member>
+        <member name="M:SharpOVR.OVR.TraceMessage(SharpOVR.LogLevel,System.String)">
+            <summary>
+            Writes a message string to the LibOVR tracing mechanism (if enabled).
+            This message will be passed back to the application via the LogCallback if 
+            it was registered.
+            </summary>
+            <param name="level">The level.</param>
+            <param name="message">The message.</param>
+            <returns>the length of the message or a negative value if the message is too large.</returns>
+        </member>
+        <member name="M:SharpOVR.OVR.GetTimeInSeconds">
+            <summary>
+            Returns global, absolute high-resolution time in seconds.
+            This is the same value as used in sensor messages.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.OVR.HmdDetect">
+            <summary>
+            Detects or re-detects HMDs and reports the total number detected.
+            Users can get information about each HMD by calling HmdCreate with an index.
+            </summary>
+            <returns>The number of HMDs detected.</returns>
+        </member>
+        <member name="M:SharpOVR.OVR.HmdCreate(System.Int32)">
+            <summary>
+            Creates an HMD and fills in data about it.
+            Index can [0 .. HmdDetect()-1]; index mappings can cange after each HmdDetect call.
+            If not null, returned HMD must be disposed.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpOVR.OVR.HmdCreateDebug(SharpOVR.HMDType)">
+            <summary>
+            Creates a "fake" HMD used for debugging only. This is not tied to specific hardware,
+            but may be used to debug some of the related rendering.
+            </summary>
+            <param name="type">The type of HMD to create.</param>
+            <returns>An HMD.</returns>
+        </member>
+        <member name="M:SharpOVR.OVR.MatrixProjection(SharpOVR.FovPort,System.Single,System.Single,SharpOVR.Projection)">
+            <summary>
+            Used to generate projection from EyeDesc.Fov
+            </summary>
+            <param name="fov">The fov.</param>
+            <param name="znear">The znear.</param>
+            <param name="zfar">The zfar.</param>
+            <param name="projection">The projection.</param>
+            <returns>Returns the calculated projection matrix.</returns>
+        </member>
+        <member name="M:SharpOVR.OVR.MatrixOrthoSubProjection(SharpDX.Matrix,SharpDX.Vector2,System.Single,System.Single)">
+            <summary>
+            Matrixes the ortho sub projection.
+            </summary>
+            <param name="projection">The projection.</param>
+            <param name="orthoScale">The ortho scale.</param>
+            <param name="orthoDistance">The ortho distance.</param>
+            <param name="eyeViewAdjustX">The eye view adjust x.</param>
+            <returns>Returns the calculated projection matrix.</returns>
+        </member>
+        <member name="M:SharpOVR.OVR.TimewarpProjection(SharpDX.Matrix)">
+            <summary>
+            Extracts the required data from the result of MatrixProjection.
+            </summary>
+            <param name="projection">Specifies the project matrix from which to extract TimewarpProjectionDesc.</param>
+            <returns>Returns the extracted ovrTimewarpProjectionDesc.</returns>
+        </member>
+        <member name="M:SharpOVR.OVR.CalcEyePoses(SharpOVR.PoseF,SharpDX.Vector3[],SharpOVR.PoseF[]@)">
+            <summary>
+            Computes offset eye poses based on headPose returned by ovrTrackingState.
+            </summary>
+            <param name="headPose">Indicates the HMD position and orientation to use for the calculation.</param>
+            <param name="hmdToEyeViewOffset">Can be ovrEyeRenderDesc.HmdToEyeViewOffset returned from 
+            ovrHmd_GetRenderDesc. For monoscopic rendering, use a vector that is the average 
+            of the two vectors for both eyes.</param>
+            <param name="eyePoses">If outEyePoses are used for rendering, they should be passed to 
+            HMD.SubmitFrame() in LayerEyeFov.RenderPose or LayerEyeFovDepth.RenderPose.</param>
+        </member>
+        <member name="P:SharpOVR.OVR.VersionString">
+            <summary>
+            Gets the version string representing libOVR version.
+            </summary>
+            <value>
+            The version string.
+            </value>
+        </member>
+        <member name="T:SharpOVR.Profile">
+            <summary>
+            Represents the user profile.
+            </summary>
+        </member>
+        <member name="P:SharpOVR.Profile.User">
+            <summary>
+            Gets the user.
+            </summary>
+            <value>
+            The user.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.Gender">
+            <summary>
+            Gets the gender.
+            </summary>
+            <value>
+            The gender.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.PlayerHeight">
+            <summary>
+            Gets the height of the player.
+            </summary>
+            <value>
+            The height of the player.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.EyeHeight">
+            <summary>
+            Gets the height of the eye.
+            </summary>
+            <value>
+            The height of the eye.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.IPD">
+            <summary>
+            Gets the ipd.
+            </summary>
+            <value>
+            The ipd.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.NeckEyeDistance">
+            <summary>
+            Gets the neck eye distance.
+            </summary>
+            <value>
+            The neck eye distance.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.EyeReliefDial">
+            <summary>
+            Gets the eye relief dial.
+            </summary>
+            <value>
+            The eye relief dial.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.EyeToNoseDist">
+            <summary>
+            Gets the eye to nose dist.
+            </summary>
+            <value>
+            The eye to nose dist.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.MaxEyeToPlateDist">
+            <summary>
+            Gets the maximum eye to plate dist.
+            </summary>
+            <value>
+            The maximum eye to plate dist.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.EyeCup">
+            <summary>
+            Gets the eye cup.
+            </summary>
+            <value>
+            The eye cup.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.CustomEyeRender">
+            <summary>
+            Gets a value indicating whether [custom eye render].
+            </summary>
+            <value>
+              <c>true</c> if [custom eye render]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.Latencies">
+            <summary>
+            Gets the DK2 latency numbers.
+            </summary>
+            <value>
+            The DK2 Latencies.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.QueueAheadEnabled">
+            <summary>
+            Gets or sets a value indicating whether [queue ahead enabled].
+            </summary>
+            <value>
+              <c>true</c> if [queue ahead enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Profile.HUDMode">
+            <summary>
+            Gets or sets the hud mode.
+            </summary>
+            <value>
+            The hud mode.
+            </value>
+        </member>
+        <member name="T:SharpOVR.D3D11TextureData">
+            <summary>
+            Used to pass D3D11 eye texture data to Hmd.EndFrame.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.Header">
+            <summary>
+            General device settings.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.pTexture">
+            <summary>
+            The D3D11 texture containing the undistorted eye image.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.pSRView">
+            <summary>
+            The D3D11 shader resource view for this texture.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.PlatformData0">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.PlatformData1">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.PlatformData2">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.PlatformData3">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.PlatformData4">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.D3D11TextureData.PlatformData5">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.ErrorInfo">
+            <summary>
+            Provides information about the last error.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ErrorInfo.Result">
+            <summary>
+            The result from the last API call that generated an error Result.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ErrorInfo.ErrorString">
+            <summary>
+            A UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.EyeRenderDesc">
+            <summary>
+            Rendering information for each eye. Computed by HMD.GetRenderDesc() based on the
+            specified FOV. Note that the rendering viewport is not included
+            here as it can be specified separately and modified per frame by
+            passing different Viewport values in the layer structure.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeRenderDesc.Eye">
+            <summary>
+            The eye index this instance corresponds to.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeRenderDesc.Fov">
+            <summary>
+            The field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeRenderDesc.DistortedViewport">
+            <summary>
+            Distortion viewport
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeRenderDesc.PixelsPerTanAngleAtCenter">
+            <summary>
+            How many display pixels will fit in tan(angle) = 1
+            </summary>
+        </member>
+        <member name="F:SharpOVR.EyeRenderDesc.HmdToEyeViewOffset">
+            <summary>
+            Translation to be applied to view matrix for each eye offset
+            </summary>
+        </member>
+        <member name="T:SharpOVR.FovPort">
+            <summary>
+            Field Of View (FOV) in tangent of the angle units.
+            As an example, for a standard 90 degree vertical FOV, we would 
+            have: { UpTan = tan(90 degrees / 2), DownTan = tan(90 degrees / 2) }.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FovPort.UpTan">
+            <summary>
+            The tangent of the angle between the viewing vector and the top edge of the field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FovPort.DownTan">
+            <summary>
+            The tangent of the angle between the viewing vector and the bottom edge of the field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FovPort.LeftTan">
+            <summary>
+            The tangent of the angle between the viewing vector and the left edge of the field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FovPort.RightTan">
+            <summary>
+            The tangent of the angle between the viewing vector and the right edge of the field of view.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.FrameTiming">
+            <summary>
+            Frame timing data reported by HMD.GetFrameTiming().
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FrameTiming.DisplayMidpointSeconds">
+            <summary>
+            A point in time when the middle of the screen will be displayed. For global shutter,
+            this will be the display time. For rolling shutter this is a point at which half the image has
+            been displayed. This value can be passed as an absolute time to HMD.GetTrackingState()
+            to get the best predicted pose for rendering the scene.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FrameTiming.FrameIntervalSeconds">
+            <summary>
+            Display interval between the frames. This will generally be 1 / RefreshRate of the HMD;
+            however, it may vary slightly during runtime based on video cart scan-out timing.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FrameTiming.AppFrameIndex">
+            <summary>
+            Application frame index for which we requested timing.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.FrameTiming.DisplayFrameIndex">
+            <summary>
+            HW display frame index that we expect this application frame will hit; this is the frame that
+            will be displayed at DisplayMidpointSeconds. This value is monotonically increasing with each v-sync.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.InitParams">
+            <summary>
+            Parameters for the Initialize() call.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitParams.Flags">
+            <summary>
+            Flags from ovrInitFlags to override default behavior.
+            Pass 0 for the defaults.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitParams.RequestedMinorVersion">
+            <summary>
+            Request a specific minimum minor version of the LibOVR runtime.
+            Flags must include ovrInit_RequestVersion or this will be ignored.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitParams.LogCallback">
+            <summary>
+            Log callback function, which may be called at any time asynchronously from
+            multiple threads until OVR.Shutdown() completes.
+            Pass null for no log callback.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.InitParams.ConnectionTimeoutMS">
+            <summary>
+            Number of milliseconds to wait for a connection to the server.
+            Pass 0 for the default timeout.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LogCallback">
+            <summary>
+            Signature for logging callback.
+            </summary>
+            <param name="level">The level.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:SharpOVR.LayerDirect">
+            <summary>
+            Describes a layer which is copied to the HMD as-is. Neither distortion, time warp, 
+            nor vignetting is applied to ColorTexture before it's copied to the HMD. The application
+            can, however implement these kinds of effects itself before submitting the layer.
+            This layer can be used for application-based distortion rendering and can also be 
+            used for implementing a debug HUD that's viewed on the mirror texture.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerDirect.Header">
+            <summary>
+            Header.Type must be LayerType.QuadInWorld or LayerType.Direct.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerDirect.ColorTextureLeft">
+            <summary>
+            Contains a single image, never with any stereo view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerDirect.ColorTextureRight">
+            <summary>
+            Should be set to IntPtr.Zero.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerDirect.ViewportLeft">
+            <summary>
+            Specifies the ColorTexture sub-rect UV coordinates.
+            Both ViewportLeft and ViewportRight must be valid.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerDirect.ViewportRight">
+            <summary>
+            Specifies the ColorTexture sub-rect UV coordinates.
+            Both ViewportLeft and ViewportRight must be valid.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LayerEyeFov">
+             <summary>
+             Describes a layer that specifies a monoscopic or stereoscopic view.
+             This is the kind of layer that's typically used as layer 0 to SubmitFrame,
+             as it is the kind of layer used to render a 3D stereoscopic view.
+            
+             Three options exist with respect to mono/stereo texture usage:
+                - ColorTextureLeft and ColorTextureRight contain the left and right stereo renderings, respectively. 
+                  ViewportLeft and ViewportRight refer to ColorTextureLeft and ColorTextureRight, respectively.
+                - ColorTextureLeft contains both the left and right renderings, ColorTextureRight is IntPtr.Zero, 
+                  and ViewportLeft and ViewportRight refer to sub-rects with ColorTextureLeft.
+                - ColorTextureLeft contains a single monoscopic rendering, and ViewportLeft and 
+                  ViewportRight both refer to that rendering.
+             </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.Header">
+            <summary>
+            Header.Type must be LayerType.EyeFov.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.ColorTextureLeft">
+            <summary>
+            SwapTextureSets for the left eye. 
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.ColorTextureRight">
+            <summary>
+            SwapTextureSets for the right eye. 
+            Can be IntPtr.Zero for cases described above.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.ViewportLeft">
+            <summary>
+            Specifies the left ColorTexture sub-rect UV coordinates.
+            Must be valid.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.ViewportRight">
+            <summary>
+            Specifies the right ColorTexture sub-rect UV coordinates.
+            Must be valid.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.FovLeft">
+            <summary>
+            The left viewport field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.FovRight">
+            <summary>
+            The right viewport field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.RenderPoseLeft">
+            <summary>
+            Specifies the position and orientation of the left eye view, with the position specified in meters.
+            RenderPose will typically be the value returned from OVR.CalcEyePoses(),
+            but can be different in special cases if a different head pose is used for rendering.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFov.RenderPoseRight">
+            <summary>
+            Specifies the position and orientation of the left eye view, with the position specified in meters.
+            RenderPose will typically be the value returned from OVR.CalcEyePoses(),
+            but can be different in special cases if a different head pose is used for rendering.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LayerEyeFovDepth">
+             <summary>
+              Describes a layer that specifies a monoscopic or stereoscopic view, 
+             with depth textures in addition to color textures. This is typically used to support
+             positional time warp. This struct is the same as ovrLayerEyeFov, but with the addition
+             of DepthTexture and ProjectionDesc.
+            
+             ProjectionDesc can be created using OVR.TimewarpProjectionDesc_FromProjection.
+            
+             Three options exist with respect to mono/stereo texture usage:
+                - ColorTexture[0] and ColorTexture[1] contain the left and right stereo renderings, respectively. 
+                  Viewport[0] and Viewport[1] refer to ColorTexture[0] and ColorTexture[1], respectively.
+                - ColorTexture[0] contains both the left and right renderings, ColorTexture[1] is NULL, 
+                  and Viewport[0] and Viewport[1] refer to sub-rects with ColorTexture[0].
+                - ColorTexture[0] contains a single monoscopic rendering, and Viewport[0] and 
+                  Viewport[1] both refer to that rendering.
+             </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.Header">
+            <summary>
+            Header.Type must be LayerType.EyeFov.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.ColorTextureLeft">
+            <summary>
+            SwapTextureSets for the left eye. 
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.ColorTextureRight">
+            <summary>
+            SwapTextureSets for the right eye. 
+            Can be IntPtr.Zero for cases described above.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.ViewportLeft">
+            <summary>
+            Specifies the left ColorTexture sub-rect UV coordinates.
+            Must be valid.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.ViewportRight">
+            <summary>
+            Specifies the right ColorTexture sub-rect UV coordinates.
+            Must be valid.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.FovLeft">
+            <summary>
+            The left viewport field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.FovRight">
+            <summary>
+            The right viewport field of view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.RenderPoseLeft">
+            <summary>
+            Specifies the position and orientation of the left eye view, with the position specified in meters.
+            RenderPose will typically be the value returned from OVR.CalcEyePoses(),
+            but can be different in special cases if a different head pose is used for rendering.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.RenderPoseRight">
+            <summary>
+            Specifies the position and orientation of the left eye view, with the position specified in meters.
+            RenderPose will typically be the value returned from OVR.CalcEyePoses(),
+            but can be different in special cases if a different head pose is used for rendering.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.DepthTextureLeft">
+            <summary>
+            Depth texture of left eye for positional timewarp.
+            Must map 1:1 to the ColorTextureLeft.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.DepthTextureRight">
+            <summary>
+            Depth texture of right eye for positional timewarp.
+            Must map 1:1 to the ColorTextureRight.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerEyeFovDepth.ProjectionDesc">
+            <summary>
+            Specifies how to convert DepthTexture information into meters.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.LayerHeader">
+            <summary>
+            Defines properties shared by all ovrLayer structs, such as ovrLayerEyeFov.
+            LayerHeader is used as a base member in these larger structs.
+            This struct cannot be used by itself except for the case that Type is LayerType.Disabled.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerHeader.Type">
+            <summary>
+            Described by LayerType.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerHeader.Flags">
+            <summary>
+            Described by LayerFlags.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.LayerHeader.#ctor(SharpOVR.LayerType,SharpOVR.LayerFlags)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpOVR.LayerHeader"/> struct.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="flags">The flags.</param>
+        </member>
+        <member name="T:SharpOVR.LayerQuad">
+             <summary>
+             Describes a layer of Quad type, which is a single quad in world or viewer space.
+             It is used for both ovrLayerType_QuadInWorld and ovrLayerType_QuadHeadLocked.
+             This type of layer represents a single object placed in the world and not a stereo
+             view of the world itself. 
+            
+             A typical use of ovrLayerType_QuadInWorld is to draw a television screen in a room
+             that for some reason is more convenient to draw as a layer than as part of the main
+             view in layer 0. For example, it could implement a 3D popup GUI that is drawn at a 
+             higher resolution than layer 0 to improve fidelity of the GUI.
+            
+             A use of ovrLayerType_QuadHeadLocked might be to implement a debug HUD visible in 
+             the HMD.
+            
+             Quad layers are visible from both sides; they are not back-face culled.
+             </summary>
+        </member>
+        <member name="F:SharpOVR.LayerQuad.Header">
+            <summary>
+            Header.Type must be LayerType.QuadInWorld or LayerType.QuadHeadLocked.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerQuad.ColorTexture">
+            <summary>
+            Contains a single image, never with any stereo view.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerQuad.Viewport">
+            <summary>
+            Specifies the ColorTexture sub-rect UV coordinates.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerQuad.QuadPoseCenter">
+            <summary>
+            Position and orientation of the center of the quad. Position is specified in meters.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.LayerQuad.QuadSize">
+            <summary>
+            Width and height (respectively) of the quad in meters.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.PoseF">
+            <summary>
+            Position and orientation together.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseF.Orientation">
+            <summary>
+            The orientation
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseF.Position">
+            <summary>
+            The position
+            </summary>
+        </member>
+        <member name="T:SharpOVR.PoseStateF">
+            <summary>
+            A full pose (rigid body) configuration with first and second derivatives.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.ThePose">
+            <summary>
+            The body's position and orientation.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.AngularVelocity">
+            <summary>
+            The body's angular velocity in radians per second.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.LinearVelocity">
+            <summary>
+            The body's velocity in meters per second.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.AngularAcceleration">
+            <summary>
+            The body's angular acceleration in radians per second per second.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.LinearAcceleration">
+            <summary>
+            The body's acceleration in meters per second per second.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.Pad">
+            <summary>
+            Unused struct padding.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.PoseStateF.TimeInSeconds">
+            <summary>
+            Absolute time of this state sample.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.Rect">
+            <summary>
+            A 2D rectangle with a position and size.
+            All components are integers.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.Rect.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpOVR.Rect"/> struct.
+            </summary>
+            <param name="x">The x.</param>
+            <param name="y">The y.</param>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+        </member>
+        <member name="M:SharpOVR.Rect.ToViewportF">
+            <summary>
+            Converts to a SharpDX.ViewportF.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SharpOVR.Rect.X">
+            <summary>
+            Gets the X component.
+            </summary>
+            <value>
+            The X component.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Rect.Y">
+            <summary>
+            Gets the Y component.
+            </summary>
+            <value>
+            The Y component.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Rect.Width">
+            <summary>
+            Gets the width.
+            </summary>
+            <value>
+            The width.
+            </value>
+        </member>
+        <member name="P:SharpOVR.Rect.Height">
+            <summary>
+            Gets the height.
+            </summary>
+            <value>
+            The height.
+            </value>
+        </member>
+        <member name="T:SharpOVR.RenderAPIConfig">
+            <summary>
+            Contains platform-specific information for rendering.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.Header">
+            <summary>
+            Platform-independent rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData0">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData1">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData2">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData3">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData4">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData5">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData6">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfig.PlatformData7">
+            <summary>
+            Platform-specific rendering information.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.RenderAPIConfigHeader">
+            <summary>
+            Platform-independent part of rendering API-configuration data.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfigHeader.API">
+            <summary>
+            The graphics API in use.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfigHeader.BackBufferSize">
+            <remarks>
+            Previously named RTSize.
+            </remarks>
+        </member>
+        <member name="F:SharpOVR.RenderAPIConfigHeader.Multisample">
+            <summary>
+            The number of samples per pixel.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.ResultCode">
+            <summary>
+            API call results are represented at the highest level by a single Result.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.MemoryAllocationFailure">
+            <summary>
+            Failure to allocate memory.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.SocketCreationFailure">
+            <summary>
+            Failure to create a socket.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.InvalidHmd">
+            <summary>
+            Invalid HMD parameter provided.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.Timeout">
+            <summary>
+            The operation timed out.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.NotInitialized">
+            <summary>
+            The system or component has not been initialized.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.InvalidParameter">
+            <summary>
+            Invalid parameter provided. See error info or log for details.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.ServiceError">
+            <summary>
+            Generic service error. See error info or log for details.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.NoHmd">
+            <summary>
+            The given HMD doesn't exist.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.Initialize">
+            <summary>
+            Generic initialization error.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.LibLoad">
+            <summary>
+            Couldn't load LibOVRRT.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.LibVersion">
+            <summary>
+            LibOVRRT version incompatibility.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.ServiceConnection">
+            <summary>
+            Couldn't connect to the OVR Service.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.ServiceVersion">
+            <summary>
+            OVR Service version incompatibility.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.IncompatibleOS">
+            <summary>
+            The operating system version is incompatible.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.DisplayInit">
+            <summary>
+            Unable to initialize the HMD display.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.ServerStart">
+            <summary>
+            Unable to start the server. Is it already running?
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.Reinitialization">
+            <summary>
+            Attempting to re-initialize with a different version.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.InvalidBundleAdjustment">
+            <summary>
+            Headset has no bundle adjustment data.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.USBBandwidth">
+            <summary>
+            The USB hub cannot handle the camera frame bandwidth.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.Success">
+            <summary>
+            This is a general success result.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ResultCode.SuccessNotVisible">
+            <summary>
+            Returned from a call to SubmitFrame. The call succeeded, but what the app
+            rendered will not be visible on the HMD. Ideally the app should continue
+            calling SubmitFrame, but not do any rendering. When the result becomes
+            ovrSuccess, rendering should continue as usual.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.SensorData">
+            <summary>
+            Specifies a reading we can query from the sensor.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SensorData.Accelerometer">
+            <summary>
+            Acceleration reading in m/s^2
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SensorData.Gyro">
+            <summary>
+            Rotation rate in rad/s
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SensorData.Magnetometer">
+            <summary>
+            Magnetic field in Gauss
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SensorData.Temperature">
+            <summary>
+            Temperature of the sensor in degrees Celsius
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SensorData.TimeInSeconds">
+            <summary>
+            Time when the reported IMU reading took place, in seconds
+            </summary>
+        </member>
+        <member name="T:SharpOVR.SwapTextureSet">
+            <summary>
+            Describes a set of textures that act as a rendered flip chain.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SwapTextureSet.Textures">
+            <summary>
+            Points to an array of textures.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SwapTextureSet.TextureCount">
+            <summary>
+            The number of textures referenced by the Textures array.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.SwapTextureSet.CurrentIndex">
+             <summary>
+             CurrentIndex specifies which of the Textures will be used by the ovrHmd_SubmitFrame call.
+             This is manually incremented by the application, typically in a round-robin manner.
+            
+             Before selecting a Texture as a rendertarget, the application should increment CurrentIndex by
+             1 and wrap it back to 0 if CurrentIndex == TextureCount, so that it gets a fresh rendertarget,
+             one that is not currently being used for display. It can then render to Textures[CurrentIndex].
+            
+             After rendering, the application calls ovrHmd_SubmitFrame using that same CurrentIndex value
+             to display the new rendertarget.
+            
+             The application can submit multiple frames with the same ovrSwapTextureSet and CurrentIndex 
+             value if the rendertarget does not need to be updated, for example when displaying an
+             information display whose text has not changed since the previous frame.
+            
+             Multiple layers can use the same ovrSwapTextureSet at the same time - there is no need to 
+             create a unique ovrSwapTextureSet for each layer. However, all the layers using a particular
+             ovrSwapTextureSet will share the same value of CurrentIndex, so they cannot use different
+             textures within the ovrSwapTextureSet.
+            
+             Once a particular Textures[CurrentIndex] has been sent to ovrHmd_SubmitFrame, that texture
+             should not be rendered to until a subsequent ovrHmd_SubmitFrame is made (either with a
+             different CurrentIndex value, or with a different ovrSwapTextureSet, or disabling the layer).
+             </summary>
+        </member>
+        <member name="T:SharpOVR.TimewarpProjectionDesc">
+            <summary>
+            Projection information for ovrLayerEyeFovDepth.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TimewarpProjectionDesc.Projection22">
+            <summary>
+            Projection matrix element [2][2].
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TimewarpProjectionDesc.Projection23">
+            <summary>
+            Projection matrix element [2][3].
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TimewarpProjectionDesc.Projection32">
+            <summary>
+            Projection matrix element [3][2].
+            </summary>
+        </member>
+        <member name="T:SharpOVR.TrackingState">
+            <summary>
+            Tracking state at a given absolute time (describes predicted HMD pose etc).
+            Returned by HMD.GetTrackingState().
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingState.HeadPose">
+            <summary>
+            Predicted head pose (and derivatives) at the requested absolute time.
+            The look-ahead interval is equal to (HeadPose.TimeInSeconds - RawSensorData.TimeInSeconds).
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingState.CameraPose">
+            <summary>
+            Current pose of the external camera (if present).
+            This pose includes camera tilt (roll and pitch). For a leveled coordinate
+            system use LeveledCameraPose.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingState.LeveledCameraPose">
+            <summary>
+            Camera frame aligned with gravity.
+            This value includes position and yaw of the camera, but not roll and pitch.
+            It can be used as a reference point to render real-world objects in the correct location.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingState.RawSensorData">
+            <summary>
+            The most recent sensor data received from the HMD
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingState.StatusFlags">
+            <summary>
+            Sensor status described by ovrStatusBits.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TrackingState.LastCameraFrameCounter">
+            <summary>
+            Tag the vision processing results to a certain frame counter number.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.TextureHeader">
+            <summary>
+            Platform-independent part of the eye texture descriptor.
+            It is a part of ovrTexture, passed to Hmd.EndFrame().
+            If RenderViewport is all zeros then the full texture will be used.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TextureHeader.API">
+            <summary>
+            The API
+            </summary>
+        </member>
+        <member name="F:SharpOVR.TextureHeader.TextureSize">
+            <summary>
+            The texture size
+            </summary>
+        </member>
+        <member name="T:SharpOVR.ViewScaleDesc">
+            <summary>
+            Contains the data necessary to properly calculate position info for various layer types.
+            - HmdToEyeViewOffset is the same value pair provided in EyeRenderDesc.
+            - HmdSpaceToWorldScaleInMeters is used to scale player motion into in-application units.
+              In other words, it is how big an in-application unit is in the player's physical meters.
+              For example, if the application uses inches as its units then HmdSpaceToWorldScaleInMeters would be 0.0254.
+              Note that if you are scaling the player in size, this must also scale. So if your application
+              units are inches, but you're shrinking the player to half their normal size, then
+              HmdSpaceToWorldScaleInMeters would be 0.0254*2.0.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ViewScaleDesc.HmdToEyeViewOffsetLeft">
+            <summary>
+            Translation of left eye.
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ViewScaleDesc.HmdToEyeViewOffsetRight">
+            <summary>
+            Translation of right eye
+            </summary>
+        </member>
+        <member name="F:SharpOVR.ViewScaleDesc.HmdSpaceToWorldScaleInMeters">
+            <summary>
+            Ratio of viewer units to meter units.
+            </summary>
+        </member>
+        <member name="T:SharpOVR.SwapTexture">
+            <summary>
+            Wrapper class for the SwapTextureSet that also maintains the render target views needed for D3D11 rendering.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.SwapTexture.AdvanceToNextView">
+            <summary>
+            Advances to next view.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.SwapTexture.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:SharpOVR.SwapTexture.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="P:SharpOVR.SwapTexture.TextureSet">
+            <summary>
+            Gets the texture set.
+            </summary>
+            <value>
+            The texture set.
+            </value>
+        </member>
+        <member name="P:SharpOVR.SwapTexture.CurrentIndex">
+            <summary>
+            Gets the index of the current.
+            </summary>
+            <value>
+            The index of the current.
+            </value>
+        </member>
+        <member name="P:SharpOVR.SwapTexture.CurrentView">
+            <summary>
+            Gets the current view.
+            </summary>
+            <value>
+            The current view.
+            </value>
+        </member>
+        <member name="P:SharpOVR.SwapTexture.DepthStencilView">
+            <summary>
+            Gets the depth stencil view.
+            </summary>
+            <value>
+            The depth stencil view.
+            </value>
+        </member>
+        <member name="P:SharpOVR.SwapTexture.Size">
+            <summary>
+            Gets the size.
+            </summary>
+            <value>
+            The size.
+            </value>
+        </member>
+        <member name="P:SharpOVR.SwapTexture.Viewport">
+            <summary>
+            Gets the viewport.
+            </summary>
+            <value>
+            The viewport.
+            </value>
+        </member>
+    </members>
+</doc>
